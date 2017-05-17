@@ -25,5 +25,15 @@ isn't about reasonable though.
                                   \ 
                                    \
 
-* npm install
-*
+
+# Start Development Server
+
+   yarn start
+
+# Run the Tests
+
+   yarn test
+
+# Bundle Static Files for Production
+
+   yarn build
