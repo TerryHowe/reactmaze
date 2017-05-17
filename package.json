@@ -1,19 +1,22 @@
 {
   "name": "reactmaze",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "private": true,
   "description": "React 3D Maze",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Terry Howe",
   "license": "MIT",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
   "devDependencies": {
-    "underscore": "^1.8.3",
-    "minimatch": "^3.0.4",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.3.1",
-    "gulp-sass": "^3.1.0"
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
