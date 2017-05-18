@@ -20,9 +20,75 @@ class Maze extends Component {
     this.state = {x: 0, y: 0, direction: 'N', text: 'AAAAA'};
   }
 
+  goForward = (prevState) => {
+    switch (prevState.direction) {
+    case 'N':
+      return({y: prevState.y+1});
+    case 'E':
+      return({x: prevState.x+1});
+    case 'S':
+      return({y: prevState.y-1});
+    default:
+      return({direction: 'W', x: prevState.x-1});
+    }
+  }
+
+  goBackward = (prevState) => {
+    switch (prevState.direction) {
+    case 'N':
+      return({y: prevState.y-1});
+    case 'E':
+      return({x: prevState.x-1});
+    case 'S':
+      return({y: prevState.y+1});
+    default:
+      return({direction: 'W', x: prevState.x+1});
+    }
+  }
+
+  goLeft = (prevState) => {
+    switch (prevState.direction) {
+    case 'N':
+      return({direction: 'W'});
+    case 'E':
+      return({direction: 'N'});
+    case 'S':
+      return({direction: 'E'});
+    default:
+      return({direction: 'S'});
+    }
+  }
+
+  goRight = (prevState) => {
+    switch (prevState.direction) {
+    case 'N':
+      return({direction: 'E'});
+    case 'E':
+      return({direction: 'S'});
+    case 'S':
+      return({direction: 'W'});
+    default:
+      return({direction: 'N'});
+    }
+  }
+
   handleKeyDown = (e) => {
-    this.setState({direction: 'S'});
-    alert(e.key);
+    switch (e.key) {
+    case 'w':
+      this.setState(prevState => (this.goForward(prevState)));
+      break;
+    case 'a':
+      this.setState(prevState => (this.goLeft(prevState)));
+      break;
+    case 's':
+      this.setState(prevState => (this.goBackward(prevState)));
+      break;
+    case 'd':
+      this.setState(prevState => (this.goRight(prevState)));
+      break;
+    default:
+      break;
+    }
   }
 
   componentDidMount() {
