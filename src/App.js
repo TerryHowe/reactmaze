@@ -69,9 +69,6 @@ class Maze extends Component {
     this.state = {x: 0, y: 0, direction: 'N'};
   }
 
-  setPassages= (data) => {
-  }
-
   goForward = (prevState) => {
     switch (prevState.direction) {
     case 'N':
