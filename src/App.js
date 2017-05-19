@@ -10,9 +10,9 @@ function TextView(props) {
     <li key={room.id}>{room.toString()}</li>
   );
   return (
-    <pre>
-      X{listRooms}X
-    </pre>
+    <ul>
+      {listRooms}
+    </ul>
   );
 }
 
@@ -36,13 +36,32 @@ class Room {
     this.passages = [];
   }
 
+  addPassage = (passage) => {
+    this.passages = passage;
+  }
+
   toString = () => {
-    var listPassages = this.passages.map((passage) =>
+    let listPassages = this.passages.forEach((passage) =>
       passage.toString()
     );
     return(this.id.toString() + ": " + this.x.toString() + "," + this.y.toString() + " " + listPassages);
   }
 }
+
+/*
+class Passage {
+  constructor(passage) {
+    this.id = passage.id;
+    this.source_id = passage.source_id;
+    this.destination_id = passage.destination_id;
+    this.direction = passage.direction;
+  }
+
+  toString = () => {
+    return(this.source_id.toString() + ": " + this.destination_id.toString() + "," + this.direction.toString());
+  }
+}
+*/
 
 class Maze extends Component {
   constructor(props) {
@@ -127,12 +146,23 @@ class Maze extends Component {
 
   makeRooms = (data) => {
     var rs = [];
-    data.forEach(function(room) {
+    data.forEach(room => {
       let r = new Room(room);
       rs[r.id] = r;
     });
     this.setState({rooms: rs});
   }
+
+/*
+  makePassages = (data) => {
+    var ps = [];
+    data.forEach(passage => {
+      let p = new Passage(passage);
+      ps.push(p);
+    });
+    this.setState({passages: ps});
+  }
+*/
 
   componentDidMount = () => {
     window.addEventListener('keydown', this.handleKeyDown);
@@ -143,12 +173,15 @@ class Maze extends Component {
     }).then(function(json) {
       that.makeRooms(json.data);
     })
+
+/*
     fetch('http://localhost:4000/passages.json')
     .then(function(response) {
       return response.json();
     }).then(function(json) {
-      that.addPassages(json.data);
+      that.makePassages(json.data);
     })
+*/
   }
 
   componentWillUnmount() {
