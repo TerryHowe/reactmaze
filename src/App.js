@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-var Room = require('./Room').Room;
+var Room = require('./Room');
 
 
 function TextView(props) {
