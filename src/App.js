@@ -2,22 +2,52 @@ import React, { Component } from 'react';
 import './App.css';
 
 function TextView(props) {
-  if (!props.text) {
+  if (!props.rooms) {
     return null;
   }
 
+  const listRooms = props.rooms.map((room) =>
+    <li>{room.x},{room.y}</li>
+  );
   return (
     <pre>
-      {props.text}
+      X{listRooms}X
     </pre>
   );
 }
 
 
+/*
+        response.json().then(function(json) {
+          json.data.forEach(function(room) {
+            rs[room.x] = rs[room.x] ? rs[room.x] : [];
+            rs[room.x][room.y] = {title: room.x.toString() + "," + room.y.toString()};
+          });
+          this.setRooms(rs);
+          return rs;
+        });
+
+class Rooms {
+  constructor(data) {
+    this.rooms = data;
+  }
+
+  get = (x,y) => {
+    return this.rooms.toString();
+  }
+}
+*/
+
 class Maze extends Component {
   constructor(props) {
     super(props);
-    this.state = {x: 0, y: 0, direction: 'N', text: 'AAAAA'};
+    /*fetch('http://localhost:4000/passages.json')
+    .then(result=>result.json())
+    .then(items=>this.setPassages(items.data));*/
+    this.state = {x: 0, y: 0, direction: 'N'};
+  }
+
+  setPassages= (data) => {
   }
 
   goForward = (prevState) => {
@@ -87,12 +117,20 @@ class Maze extends Component {
       this.setState(prevState => (this.goRight(prevState)));
       break;
     default:
-      break;
+      return;
     }
+    return;
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.addEventListener('keydown', this.handleKeyDown);
+    var that = this;
+    fetch('http://localhost:4000/rooms.json')
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      that.setState({rooms: json.data});
+    })
   }
 
   componentWillUnmount() {
@@ -103,7 +141,7 @@ class Maze extends Component {
     return (
       <div>
         <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
-        <TextView text={this.state.text} />
+        <TextView rooms={this.state.rooms} />
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
