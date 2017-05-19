@@ -148,7 +148,13 @@ class Maze extends Component {
       let p = new Passage(passage);
       ps.push(p);
     });
-    this.setState({passages: ps});
+    this.setState((prevstate) => ({
+      rooms: this.populate(prevstate.rooms, ps)
+    }));
+  }
+
+  populate = (rooms, passages) => {
+    return(rooms);
   }
 
   componentDidMount = () => {
