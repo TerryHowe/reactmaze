@@ -48,7 +48,6 @@ class Room {
   }
 }
 
-/*
 class Passage {
   constructor(passage) {
     this.id = passage.id;
@@ -61,7 +60,6 @@ class Passage {
     return(this.source_id.toString() + ": " + this.destination_id.toString() + "," + this.direction.toString());
   }
 }
-*/
 
 class Maze extends Component {
   constructor(props) {
@@ -150,7 +148,6 @@ class Maze extends Component {
     this.setState({rooms: rs});
   }
 
-/*
   makePassages = (data) => {
     var ps = [];
     data.forEach(passage => {
@@ -159,7 +156,6 @@ class Maze extends Component {
     });
     this.setState({passages: ps});
   }
-*/
 
   componentDidMount = () => {
     window.addEventListener('keydown', this.handleKeyDown);
@@ -171,14 +167,12 @@ class Maze extends Component {
       that.makeRooms(json.data);
     })
 
-/*
     fetch('http://localhost:4000/passages.json')
     .then(function(response) {
       return response.json();
     }).then(function(json) {
       that.makePassages(json.data);
     })
-*/
   }
 
   componentWillUnmount() {
