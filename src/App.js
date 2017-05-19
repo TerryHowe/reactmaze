@@ -7,7 +7,7 @@ function TextView(props) {
   }
 
   const listRooms = props.rooms.map((room) =>
-    <li key={room.id}>{room.x},{room.y}</li>
+    <li key={room.id}>{room.toString()}</li>
   );
   return (
     <pre>
@@ -27,23 +27,26 @@ function TextView(props) {
           return rs;
         });
 
-class Rooms {
-  constructor(data) {
-    this.rooms = data;
+*/
+class Room {
+  constructor(room) {
+    this.id = room.id;
+    this.x = room.x;
+    this.y = room.y;
+    this.passages = [];
   }
 
-  get = (x,y) => {
-    return this.rooms.toString();
+  toString = () => {
+    var listPassages = this.passages.map((passage) =>
+      passage.toString()
+    );
+    return(this.id.toString() + ": " + this.x.toString() + "," + this.y.toString() + " " + listPassages);
   }
 }
-*/
 
 class Maze extends Component {
   constructor(props) {
     super(props);
-    /*fetch('http://localhost:4000/passages.json')
-    .then(result=>result.json())
-    .then(items=>this.setPassages(items.data));*/
     this.state = {x: 0, y: 0, direction: 'N'};
   }
 
@@ -122,6 +125,15 @@ class Maze extends Component {
     return;
   }
 
+  makeRooms = (data) => {
+    var rs = [];
+    data.forEach(function(room) {
+      let r = new Room(room);
+      rs[r.id] = r;
+    });
+    this.setState({rooms: rs});
+  }
+
   componentDidMount = () => {
     window.addEventListener('keydown', this.handleKeyDown);
     var that = this;
@@ -129,7 +141,13 @@ class Maze extends Component {
     .then(function(response) {
       return response.json();
     }).then(function(json) {
-      that.setState({rooms: json.data});
+      that.makeRooms(json.data);
+    })
+    fetch('http://localhost:4000/passages.json')
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      that.addPassages(json.data);
     })
   }
 
