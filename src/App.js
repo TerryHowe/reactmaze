@@ -26,11 +26,11 @@ class Room {
   }
 
   addPassage = (passage) => {
-    this.passages = passage;
+    this.passages.push(passage);
   }
 
   toString = () => {
-    return(this.id.toString() + ": " + this.x.toString() + "," + this.y.toString() + " " + this.passages.join());
+    return(this.x.toString() + "," + this.y.toString() + ": " + this.passages.join(';'));
   }
 }
 
@@ -43,7 +43,7 @@ class Passage {
   }
 
   toString = () => {
-    return(this.source_id.toString() + ": " + this.destination_id.toString() + "," + this.direction.toString());
+    return(this.destination_id.toString() + "," + this.direction.toString());
   }
 }
 
@@ -154,6 +154,9 @@ class Maze extends Component {
   }
 
   populate = (rooms, passages) => {
+    passages.forEach(passage => {
+      rooms[passage.source_id].addPassage(passage);
+    })
     return(rooms);
   }
 
