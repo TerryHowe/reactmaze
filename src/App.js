@@ -25,10 +25,6 @@ class Room {
     this.passages = [];
   }
 
-  addPassage = (passage) => {
-    this.passages.push(passage);
-  }
-
   toString = () => {
     return(this.x.toString() + "," + this.y.toString() + ": " + this.passages.join(';'));
   }
@@ -154,8 +150,10 @@ class Maze extends Component {
   }
 
   populate = (rooms, passages) => {
-    passages.forEach(passage => {
-      rooms[passage.source_id].addPassage(passage);
+    rooms.forEach(room => {
+      room.passages = passages.filter(passage => {
+        return (room.id === passage.source_id);
+      })
     })
     return(rooms);
   }
