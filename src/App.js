@@ -30,10 +30,7 @@ class Room {
   }
 
   toString = () => {
-    let listPassages = this.passages.forEach((passage) =>
-      passage.toString()
-    );
-    return(this.id.toString() + ": " + this.x.toString() + "," + this.y.toString() + " " + listPassages);
+    return(this.id.toString() + ": " + this.x.toString() + "," + this.y.toString() + " " + this.passages.join());
   }
 }
 
@@ -135,6 +132,14 @@ class Maze extends Component {
       rs[r.id] = r;
     });
     this.setState({rooms: rs});
+
+    var that = this;
+    fetch('http://localhost:4000/passages.json')
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      that.makePassages(json.data);
+    })
   }
 
   makePassages = (data) => {
@@ -155,13 +160,6 @@ class Maze extends Component {
     }).then(function(json) {
       that.makeRooms(json.data);
     })
-
-    fetch('http://localhost:4000/passages.json')
-    .then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      that.makePassages(json.data);
-    })
   }
 
   componentWillUnmount() {
@@ -172,7 +170,7 @@ class Maze extends Component {
     return (
       <div>
         <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
-        <TextView rooms={this.state.passages} />
+        <TextView rooms={this.state.rooms} />
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
