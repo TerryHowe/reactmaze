@@ -17,17 +17,6 @@ function TextView(props) {
 }
 
 
-/*
-        response.json().then(function(json) {
-          json.data.forEach(function(room) {
-            rs[room.x] = rs[room.x] ? rs[room.x] : [];
-            rs[room.x][room.y] = {title: room.x.toString() + "," + room.y.toString()};
-          });
-          this.setRooms(rs);
-          return rs;
-        });
-
-*/
 class Room {
   constructor(room) {
     this.id = room.id;
@@ -183,7 +172,7 @@ class Maze extends Component {
     return (
       <div>
         <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
-        <TextView rooms={this.state.rooms} />
+        <TextView rooms={this.state.passages} />
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
