@@ -7,7 +7,7 @@ function TextView(props) {
   }
 
   const listRooms = props.rooms.map((room) =>
-    <li>{room.x},{room.y}</li>
+    <li key={room.id}>{room.x},{room.y}</li>
   );
   return (
     <pre>
