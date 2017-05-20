@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Maze.css';
 var Room = require('./Room');
 
 
