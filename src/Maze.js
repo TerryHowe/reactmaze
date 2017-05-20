@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import './Maze.css';
+var Passage = require('./Passage');
 var Room = require('./Room');
 var TextView = require('./TextView');
 
-
-class Passage {
-  constructor(passage) {
-    this.id = passage.id;
-    this.source_id = passage.source_id;
-    this.destination_id = passage.destination_id;
-    this.direction = passage.direction;
-  }
-
-  toString = () => {
-    return(this.destination_id.toString() + "," + this.direction.toString());
-  }
-}
 
 class Maze extends Component {
   constructor(props) {
