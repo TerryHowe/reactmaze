@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
 import './Maze.css';
 var Room = require('./Room');
-
-
-function TextView(props) {
-  if (!props.rooms) {
-    return null;
-  }
-
-  const listRooms = props.rooms.map((room) =>
-    <li key={room.id}>{room.toString()}</li>
-  );
-  return (
-    <ul>
-      {listRooms}
-    </ul>
-  );
-}
+var TextView = require('./TextView');
 
 
 class Passage {
