@@ -1,13 +1,13 @@
 import React from 'react';
 
 function TextView(props) {
-  if (!props.room) {
+  if (!props.rooms) {
     return null;
   }
 
   return (
     <pre>
-      {props.room.toString()}
+      {props.rooms[props.x][props.y].toString()}
     </pre>
   );
 }

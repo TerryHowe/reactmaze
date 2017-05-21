@@ -87,7 +87,10 @@ class Maze extends Component {
     var rs = [];
     data.forEach(room => {
       let r = new Room(room);
-      rs[r.id] = r;
+      if (typeof rs[r.x] === 'undefined') {
+        rs[r.x] = [];
+      }
+      rs[r.x][r.y]= r;
     });
     this.setState({rooms: rs});
 
@@ -110,12 +113,14 @@ class Maze extends Component {
   }
 
   populate = (rooms, passages) => {
-    rooms.forEach(room => {
-      room.passages = passages.filter(passage => {
-        return (room.id === passage.source_id);
+    rooms.forEach(xrooms => {
+      xrooms.forEach(yroom => {
+        yroom.passages = passages.filter(passage => {
+          return (yroom.id === passage.source_id);
+        })
       })
     })
-    return({rooms: rooms, room: rooms[1]});
+    return({rooms: rooms});
   }
 
   componentDidMount = () => {
@@ -137,7 +142,7 @@ class Maze extends Component {
     return (
       <div>
         <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
-        <TextView room={this.state.room} direction={this.state.direction}/>
+        <TextView rooms={this.state.rooms} x={this.state.x} y={this.state.y} direction={this.state.direction}/>
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
