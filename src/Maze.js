@@ -106,9 +106,7 @@ class Maze extends Component {
       let p = new Passage(passage);
       ps.push(p);
     });
-    this.setState((prevstate) => ({
-      rooms: this.populate(prevstate.rooms, ps)
-    }));
+    this.setState((prevstate) => (this.populate(prevstate.rooms, ps)));
   }
 
   populate = (rooms, passages) => {
@@ -117,7 +115,7 @@ class Maze extends Component {
         return (room.id === passage.source_id);
       })
     })
-    return(rooms);
+    return({rooms: rooms, room: rooms.first});
   }
 
   componentDidMount = () => {
