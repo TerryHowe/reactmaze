@@ -115,7 +115,7 @@ class Maze extends Component {
         return (room.id === passage.source_id);
       })
     })
-    return({rooms: rooms, room: rooms.first});
+    return({rooms: rooms, room: rooms[1]});
   }
 
   componentDidMount = () => {
@@ -137,7 +137,7 @@ class Maze extends Component {
     return (
       <div>
         <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
-        <TextView rooms={this.state.rooms} />
+        <TextView room={this.state.room} direction={this.state.direction}/>
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>

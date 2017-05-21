@@ -1,17 +1,14 @@
 import React from 'react';
 
 function TextView(props) {
-  if (!props.rooms) {
+  if (!props.room) {
     return null;
   }
 
-  const listRooms = props.rooms.map((room) =>
-    <li key={room.id}>{room.toString()}</li>
-  );
   return (
-    <ul>
-      {listRooms}
-    </ul>
+    <pre>
+      {props.room.toString()}
+    </pre>
   );
 }
 
