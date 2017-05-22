@@ -43,6 +43,7 @@ const LEFT = `
   /                              
  /                               
 `;
+/*
 const RIGHT = `
                                 /
                                / 
@@ -232,16 +233,25 @@ const FORWARD_RIGHT_FORWARD_LEFT = `
                                  
                                  
 `;
+*/
 
-function TextRender(room) {
+function TextView(props) {
+  if (!props.rooms) {
+    return null;
+  }
+
+  let room = props.rooms[props.x][props.y];
+  let direction = props.direction;
+    let t = [VIEW.split("")]
+    let left_room = room.goLeft(direction)
 /*
-  def render(room, direction)
-    t = [VIEW]
-    left_room = room.go_left(direction)
     forward_room = room.go_forward(direction)
     right_room = room.go_right(direction)
-    if left_room.nil?
-      t.append(LEFT)
+*/
+    if (typeof left_room === 'undefined') {
+      t.push(LEFT.split(""))
+    }
+/*
     else
       if left_room.go_forward(direction).nil?
         t.append(LEFT_FORWARD_RIGHT)
@@ -282,17 +292,13 @@ function TextRender(room) {
   end
 end
 */
-  return(room.toString());
-}
-
-function TextView(props) {
-  if (!props.rooms) {
-    return null;
-  }
+  let zip= rows=>rows[0].map((_,c)=>rows.map(row=>row[c]))
+  let z = zip(t);
+  let result = z.map(row => {return row.reduce((a,b) => {return a>b?a:b;})});
 
   return (
     <pre>
-      {TextRender(props.rooms[props.x][props.y])}
+      {result}
     </pre>
   );
 }
