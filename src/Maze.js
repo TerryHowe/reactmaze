@@ -131,12 +131,24 @@ class Maze extends Component {
   }
 
   render() {
+    let p = location.pathname.split('/');
     let room = this.state.room;
+    let rooms = this.state.rooms
+    let direction = this.state.direction;
+    if ((p.length === 4) && (rooms)) {
+      direction = p[3];
+      let x = parseInt(p[1], 10);
+      let y = parseInt(p[2], 10);
+      if (this.state.rooms[x][y]) {
+        room = this.state.rooms[x][y];
+      }
+    }
     let coords = room.x.toString() + "," + room.y.toString();
     return (
       <div>
-        <h1>Looking {this.state.direction} from {coords}.</h1>
-        <TextView room={this.state.room} direction={this.state.direction}/>
+        <h1>Looking {direction} from {coords}.</h1>
+        <TextView room={room} direction={direction}/>
+        <p>{location.pathname}</p>
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
