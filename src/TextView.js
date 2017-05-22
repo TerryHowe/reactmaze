@@ -233,6 +233,7 @@ const FORWARD_RIGHT_FORWARD_LEFT = `
                                  
 `;
 
+function TextRender(room) {
 /*
   def render(room, direction)
     t = [VIEW]
@@ -281,6 +282,9 @@ const FORWARD_RIGHT_FORWARD_LEFT = `
   end
 end
 */
+  return(room.toString());
+}
+
 function TextView(props) {
   if (!props.rooms) {
     return null;
@@ -288,7 +292,7 @@ function TextView(props) {
 
   return (
     <pre>
-      {props.rooms[props.x][props.y].toString()}
+      {TextRender(props.rooms[props.x][props.y])}
     </pre>
   );
 }
