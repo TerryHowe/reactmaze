@@ -65,6 +65,7 @@ const RIGHT = `
                                \\ 
                                 \\
 `;
+*/
 const FORWARD = `
                                  
                                  
@@ -86,6 +87,7 @@ const FORWARD = `
                                  
                                  
 `;
+/*
 const LEFT_FORWARD_RIGHT = `
                                  
                                  
@@ -244,51 +246,55 @@ function TextView(props) {
   let direction = props.direction;
   let t = [VIEW.split("")]
   let left_room = room.goLeft(direction)
-  forward_room = room.go_forward(direction)
+  let forward_room = room.goForward(direction)
 /*
-  right_room = room.go_right(direction)
+  let right_room = room.goRight(direction)
 */
   if (typeof left_room === 'undefined') {
     t.push(LEFT.split(""))
   }
 /*
-  } else {
-    if (typeof left_room.go_forward(direction) === 'undefined') {
-      t.append(LEFT_FORWARD_RIGHT)
+  else {
+    if (typeof left_room.goForward(direction) === 'undefined') {
+      t.push(LEFT_FORWARD_RIGHT.split(""))
     }
   }
 */
   if (typeof forward_room === 'undefined') {
-    t.append(FORWARD)
-  } else {
+    t.push(FORWARD.split(""))
+  }
 /*
-    forward_left_room = forward_room.go_left(direction)
+  else {
+    forward_left_room = forward_room.goLeft(direction)
     if (typeof forward_left_room === 'undefined') {
-      t.append(FORWARD_LEFT)
-    } else {
-      if (typeof forward_left_room.go_forward(direction) === 'undefined') {
-        t.append(FORWARD_LEFT_FORWARD_RIGHT)
+      t.push(FORWARD_LEFT.split(""))
+    }
+    else {
+      if (typeof forward_left_room.goForward(direction) === 'undefined') {
+        t.push(FORWARD_LEFT_FORWARD_RIGHT.split(""))
       }
     }
-    if (typeof forward_room.go_forward(direction) === 'undefined') {
-      t.append(FORWARD_FORWARD)
+    if (typeof forward_room.goForward(direction) === 'undefined') {
+      t.push(FORWARD_FORWARD.split(""))
     }
-    forward_right_room = forward_room.go_right(direction)
+    forward_right_room = forward_room.goRight(direction)
     if (typeof forward_right_room === 'undefined') {
-      t.append(FORWARD_RIGHT)
-    } else {
-      if (typeof forward_right_room.go_forward(direction) === 'undefined') {
-        t.append(FORWARD_RIGHT_FORWARD_LEFT)
+      t.push(FORWARD_RIGHT.split(""))
+    }
+    else {
+      if (typeof forward_right_room.goForward(direction) === 'undefined') {
+        t.push(FORWARD_RIGHT_FORWARD_LEFT.split(""))
       }
     }
 /*
   }
 /*
   if (typeof right_room === 'undefined') {
-    t.append(RIGHT)
-  } else {
-    if (typeof right_room.go_forward(direction) === 'undefined') {
-      t.append(RIGHT_FORWARD_LEFT)
+    t.push(RIGHT.split(""))
+  }
+  else {
+    if (typeof right_room.goForward(direction) === 'undefined') {
+      t.push(RIGHT_FORWARD_LEFT.split(""))
     }
   }
 */
