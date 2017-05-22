@@ -8,31 +8,25 @@ var TextView = require('./TextView');
 class Maze extends Component {
   constructor(props) {
     super(props);
-    this.state = {x: 0, y: 0, direction: 'N'};
+    this.state = {direction: 'N'};
   }
 
   goForward = (prevState) => {
-    let room = prevState.rooms[prevState.x][prevState.y];
-    if (typeof room === 'undefined') {
-      return({x: 0, y: 0});
-    }
+    let room = prevState.room;
     let destination = room.goForward(prevState.direction);
     if (typeof destination === 'undefined') {
       return({});
     }
-    return({room: destination, x: destination.x, y: destination.y});
+    return({room: destination});
   }
 
   goBackward = (prevState) => {
-    let room = prevState.rooms[prevState.x][prevState.y];
-    if (typeof room === 'undefined') {
-      return({x: 0, y: 0});
-    }
+    let room = prevState.room;
     let destination = room.goBackward(prevState.direction);
     if (typeof destination === 'undefined') {
       return({});
     }
-    return({x: destination.x, y: destination.y});
+    return({room: destination});
   }
 
   goLeft = (prevState) => {
@@ -136,9 +130,14 @@ class Maze extends Component {
   }
 
   render() {
+    var coords = "";
+    if (typeof this.state.room !== 'undefined') {
+        let room = this.state.room;
+        coords = room.x.toString() + "," + room.y.toString();
+    }
     return (
       <div>
-        <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
+        <h1>Looking {this.state.direction} from {coords}.</h1>
         <TextView room={this.state.room} direction={this.state.direction}/>
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
