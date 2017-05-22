@@ -195,6 +195,7 @@ const FORWARD_RIGHT = `
                                  
                                  
 `;
+*/
 const FORWARD_LEFT_FORWARD_RIGHT = `
                                  
                                  
@@ -216,6 +217,7 @@ const FORWARD_LEFT_FORWARD_RIGHT = `
                                  
                                  
 `;
+/*
 const FORWARD_RIGHT_FORWARD_LEFT = `
                                  
                                  
@@ -268,12 +270,12 @@ function TextView(props) {
     if (typeof forward_left_room === 'undefined') {
       t.push(FORWARD_LEFT.split(""))
     }
-/*
     else {
       if (typeof forward_left_room.goForward(direction) === 'undefined') {
         t.push(FORWARD_LEFT_FORWARD_RIGHT.split(""))
       }
     }
+/*
     if (typeof forward_room.goForward(direction) === 'undefined') {
       t.push(FORWARD_FORWARD.split(""))
     }
