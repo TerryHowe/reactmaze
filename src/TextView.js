@@ -211,7 +211,6 @@ const FORWARD_LEFT_FORWARD_RIGHT = `
                                  
                                  
 `;
-/*
 const FORWARD_RIGHT_FORWARD_LEFT = `
                                  
                                  
@@ -233,7 +232,6 @@ const FORWARD_RIGHT_FORWARD_LEFT = `
                                  
                                  
 `;
-*/
 
 function TextView(props) {
   if (!props.rooms) {
@@ -274,13 +272,11 @@ function TextView(props) {
     if (typeof forward_right_room === 'undefined') {
       t.push(FORWARD_RIGHT.split(""))
     }
-/*
     else {
       if (typeof forward_right_room.goForward(direction) === 'undefined') {
         t.push(FORWARD_RIGHT_FORWARD_LEFT.split(""))
       }
     }
-*/
   }
   if (typeof right_room === 'undefined') {
     t.push(RIGHT.split(""))
