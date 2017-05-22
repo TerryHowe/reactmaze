@@ -15,19 +15,19 @@ class Maze extends Component {
   goForward = (prevState) => {
     let room = prevState.room;
     let destination = room.goForward(prevState.direction);
-    if (typeof destination === 'undefined') {
-      return({});
+    if (destination) {
+      return({room: destination});
     }
-    return({room: destination});
+    return({});
   }
 
   goBackward = (prevState) => {
     let room = prevState.room;
     let destination = room.goBackward(prevState.direction);
-    if (typeof destination === 'undefined') {
-      return({});
+    if (destination) {
+      return({room: destination});
     }
-    return({room: destination});
+    return({});
   }
 
   goLeft = (prevState) => {
