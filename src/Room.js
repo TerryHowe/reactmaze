@@ -53,6 +53,19 @@ class Room {
     }
   }
 
+  getRightDirection = (direction) => {
+    switch (direction) {
+    case 'N':
+      return('E');
+    case 'E':
+      return('S');
+    case 'S':
+      return('W');
+    default:
+      return('N');
+    }
+  }
+
   goForward = (direction) => {
     return(this.passages[direction]);
   }
@@ -63,6 +76,10 @@ class Room {
 
   goLeft = (direction) => {
     return(this.passages[this.getLeftDirection(direction)]);
+  }
+
+  goRight = (direction) => {
+    return(this.passages[this.getRightDirection(direction)]);
   }
 }
 
