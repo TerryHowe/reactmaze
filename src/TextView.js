@@ -43,7 +43,6 @@ const LEFT = `
   /                              
  /                               
 `;
-/*
 const RIGHT = `
                                 /
                                / 
@@ -65,7 +64,6 @@ const RIGHT = `
                                \\ 
                                 \\
 `;
-*/
 const FORWARD = `
                                  
                                  
@@ -249,9 +247,7 @@ function TextView(props) {
   let t = [VIEW.split("")]
   let left_room = room.goLeft(direction)
   let forward_room = room.goForward(direction)
-/*
   let right_room = room.goRight(direction)
-*/
   if (typeof left_room === 'undefined') {
     t.push(LEFT.split(""))
   }
@@ -288,10 +284,10 @@ function TextView(props) {
     }
 */
   }
-/*
   if (typeof right_room === 'undefined') {
     t.push(RIGHT.split(""))
   }
+/*
   else {
     if (typeof right_room.goForward(direction) === 'undefined') {
       t.push(RIGHT_FORWARD_LEFT.split(""))
