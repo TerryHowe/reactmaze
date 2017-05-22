@@ -8,7 +8,8 @@ var TextView = require('./TextView');
 class Maze extends Component {
   constructor(props) {
     super(props);
-    this.state = {direction: 'N'};
+    let room = new Room({x: 0, y: 0})
+    this.state = {room: room, direction: 'N'};
   }
 
   goForward = (prevState) => {
@@ -130,11 +131,8 @@ class Maze extends Component {
   }
 
   render() {
-    var coords = "";
-    if (typeof this.state.room !== 'undefined') {
-        let room = this.state.room;
-        coords = room.x.toString() + "," + room.y.toString();
-    }
+    let room = this.state.room;
+    let coords = room.x.toString() + "," + room.y.toString();
     return (
       <div>
         <h1>Looking {this.state.direction} from {coords}.</h1>
