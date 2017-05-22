@@ -148,7 +148,6 @@ class Maze extends Component {
       <div>
         <h1>Looking {direction} from {coords}.</h1>
         <TextView room={room} direction={direction}/>
-        <p>{location.pathname}</p>
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
