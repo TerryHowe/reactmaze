@@ -234,11 +234,11 @@ const FORWARD_RIGHT_FORWARD_LEFT = `
 `;
 
 function TextView(props) {
-  if (!props.rooms) {
+  if (!props.room) {
     return null;
   }
 
-  let room = props.rooms[props.x][props.y];
+  let room = props.room;
   let direction = props.direction;
   let t = [VIEW.split("")]
   let left_room = room.goLeft(direction)

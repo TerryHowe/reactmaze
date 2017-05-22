@@ -20,7 +20,7 @@ class Maze extends Component {
     if (typeof destination === 'undefined') {
       return({});
     }
-    return({x: destination.x, y: destination.y});
+    return({room: destination, x: destination.x, y: destination.y});
   }
 
   goBackward = (prevState) => {
@@ -90,7 +90,7 @@ class Maze extends Component {
       }
       rs[r.x][r.y]= r;
     });
-    this.setState({rooms: rs});
+    this.setState({rooms: rs, room: rs[0][0]});
 
     var that = this;
     fetch('http://localhost:4000/passages.json')
@@ -139,7 +139,7 @@ class Maze extends Component {
     return (
       <div>
         <h1>Looking {this.state.direction} from {this.state.x},{this.state.y}.</h1>
-        <TextView rooms={this.state.rooms} x={this.state.x} y={this.state.y} direction={this.state.direction}/>
+        <TextView room={this.state.room} direction={this.state.direction}/>
         <b>w:</b> forward<br/>
         <b>a:</b> left<br/>
         <b>d:</b> right<br/>
