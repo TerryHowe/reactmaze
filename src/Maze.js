@@ -76,53 +76,35 @@ class Maze extends Component {
     return;
   }
 
-  makeRooms = (data) => {
-    var rs = [];
-    data.forEach(room => {
-      let r = new Room(room);
-      if (typeof rs[r.x] === 'undefined') {
-        rs[r.x] = [];
-      }
-      rs[r.x][r.y]= r;
+  makeRooms = (rooms, passages) => {
+    var roomMap = {};
+    rooms.forEach(r => {
+      roomMap[r.getKey()] = r;
+      r.addPassages(passages, rooms);
     });
-    this.setState({rooms: rs, room: rs[0][0]});
-
-    var that = this;
-    fetch('http://localhost:4000/passages.json')
-    .then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      that.makePassages(json.data);
-    })
+    this.setState({rooms: roomMap, room: roomMap["0,0"]});
   }
 
-  makePassages = (data) => {
-    var ps = [];
-    data.forEach(passage => {
-      let p = new Passage(passage);
-      ps.push(p);
-    });
-    this.setState((prevstate) => (this.populate(prevstate.rooms, ps)));
-  }
-
-  populate = (rooms, passages) => {
-    rooms.forEach(xrooms => {
-      xrooms.forEach(yroom => {yroom.addDestination(passages);})
-    })
-    rooms.forEach(xrooms => {
-      xrooms.forEach(yroom => {yroom.addPassages(passages);})
-    })
-    return({rooms: rooms});
-  }
-
-  componentDidMount = () => {
-    window.addEventListener('keydown', this.handleKeyDown);
+  makePassages = (passages) => {
     var that = this;
     fetch('http://localhost:4000/rooms.json')
     .then(function(response) {
       return response.json();
     }).then(function(json) {
-      that.makeRooms(json.data);
+      var rooms = json.data.map(x => {return new Room(x);});
+      that.makeRooms(rooms, passages);
+    })
+  }
+
+  componentDidMount = () => {
+    window.addEventListener('keydown', this.handleKeyDown);
+    var that = this;
+    fetch('http://localhost:4000/passages.json')
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      var passages = json.data.map(x => {return new Passage(x);});
+      that.makePassages(passages);
     })
   }
 
@@ -136,11 +118,11 @@ class Maze extends Component {
     let rooms = this.state.rooms
     let direction = this.state.direction;
     if ((p.length === 4) && (rooms)) {
+      let x = p[1];
+      let y = p[2];
       direction = p[3];
-      let x = parseInt(p[1], 10);
-      let y = parseInt(p[2], 10);
-      if (this.state.rooms[x][y]) {
-        room = this.state.rooms[x][y];
+      if (this.state.rooms[x + "," + y]) {
+        room = this.state.rooms[x + "," + y];
       }
     }
     let coords = room.x.toString() + "," + room.y.toString();

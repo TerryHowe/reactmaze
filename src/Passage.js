@@ -3,6 +3,7 @@ class Passage {
     this.id = passage.id;
     this.source_id = passage.source_id;
     this.destination_id = passage.destination_id;
+    this.destination = null;
     this.direction = passage.direction;
   }
 

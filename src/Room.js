@@ -11,18 +11,16 @@ class Room {
     return(this.x.toString() + "," + this.y.toString() + ": " + passageString);
   }
 
-  addDestination = (passages) => {
-    passages.forEach(passage => {
-      if (this.id === passage.destination_id) {
-        passage.destination = this;
-      }
-    })
+  getKey = () => {
+    return(this.x.toString() + "," + this.y.toString());
   }
 
-  addPassages = (passages) => {
+  addPassages = (passages, rooms) => {
     passages.forEach(passage => {
       if (this.id === passage.source_id) {
-        this.passages[passage.getDirection()] = passage.destination;
+        var destination = rooms.find(x => x.id === passage.destination_id);
+        var direction = passage.direction.toUpperCase()[0];
+        this.passages[direction] = destination;
       }
     })
   }
