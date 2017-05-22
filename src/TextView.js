@@ -106,7 +106,6 @@ const LEFT_FORWARD_RIGHT = `
                                  
                                  
 `;
-/*
 const RIGHT_FORWARD_LEFT = `
                                  
                                  
@@ -128,7 +127,6 @@ const RIGHT_FORWARD_LEFT = `
                                  
                                  
 `;
-*/
 const FORWARD_FORWARD = `
                                  
                                  
@@ -287,13 +285,11 @@ function TextView(props) {
   if (typeof right_room === 'undefined') {
     t.push(RIGHT.split(""))
   }
-/*
   else {
     if (typeof right_room.goForward(direction) === 'undefined') {
       t.push(RIGHT_FORWARD_LEFT.split(""))
     }
   }
-*/
   let zip= rows=>rows[0].map((_,c)=>rows.map(row=>row[c]))
   let z = zip(t);
   let result = z.map(row => {return row.reduce((a,b) => {return a>b?a:b;})});
