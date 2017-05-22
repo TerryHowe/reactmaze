@@ -130,6 +130,7 @@ const RIGHT_FORWARD_LEFT = `
                                  
                                  
 `;
+*/
 const FORWARD_FORWARD = `
                                  
                                  
@@ -151,7 +152,6 @@ const FORWARD_FORWARD = `
                                  
                                  
 `;
-*/
 const FORWARD_LEFT = `
                                  
                                  
@@ -275,10 +275,10 @@ function TextView(props) {
         t.push(FORWARD_LEFT_FORWARD_RIGHT.split(""))
       }
     }
-/*
     if (typeof forward_room.goForward(direction) === 'undefined') {
       t.push(FORWARD_FORWARD.split(""))
     }
+/*
     forward_right_room = forward_room.goRight(direction)
     if (typeof forward_right_room === 'undefined') {
       t.push(FORWARD_RIGHT.split(""))
