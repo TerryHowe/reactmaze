@@ -12,16 +12,15 @@ class Maze extends Component {
   }
 
   goForward = (prevState) => {
-    switch (prevState.direction) {
-    case 'N':
-      return({y: prevState.y+1});
-    case 'E':
-      return({x: prevState.x+1});
-    case 'S':
-      return({y: prevState.y-1});
-    default:
-      return({direction: 'W', x: prevState.x-1});
+    let room = prevState.rooms[prevState.x][prevState.y];
+    if (typeof room === 'undefined') {
+      return({x: 0, y: 0});
     }
+    let destination = room.goForward(prevState.direction);
+    if (typeof destination === 'undefined') {
+      return({});
+    }
+    return({x: destination.x, y: destination.y});
   }
 
   goBackward = (prevState) => {
@@ -114,11 +113,10 @@ class Maze extends Component {
 
   populate = (rooms, passages) => {
     rooms.forEach(xrooms => {
-      xrooms.forEach(yroom => {
-        yroom.passages = passages.filter(passage => {
-          return (yroom.id === passage.source_id);
-        })
-      })
+      xrooms.forEach(yroom => {yroom.addDestination(passages);})
+    })
+    rooms.forEach(xrooms => {
+      xrooms.forEach(yroom => {yroom.addPassages(passages);})
     })
     return({rooms: rooms});
   }

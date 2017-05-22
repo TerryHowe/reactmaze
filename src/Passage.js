@@ -6,6 +6,10 @@ class Passage {
     this.direction = passage.direction;
   }
 
+  getDirection = () => {
+    return(this.direction.toUpperCase()[0]);
+  }
+
   toString = () => {
     return(this.destination_id.toString() + "," + this.direction.toString());
   }

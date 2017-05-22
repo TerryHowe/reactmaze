@@ -22,7 +22,7 @@ class Room {
   addPassages = (passages) => {
     passages.forEach(passage => {
       if (this.id === passage.source_id) {
-        this.passages[passage.direction] = passage.destination;
+        this.passages[passage.getDirection()] = {x: passage.destination.x, y: passage.destination.y}
       }
     })
   }
