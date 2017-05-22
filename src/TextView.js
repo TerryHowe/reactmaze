@@ -151,6 +151,7 @@ const FORWARD_FORWARD = `
                                  
                                  
 `;
+*/
 const FORWARD_LEFT = `
                                  
                                  
@@ -172,6 +173,7 @@ const FORWARD_LEFT = `
                                  
                                  
 `;
+/*
 const FORWARD_RIGHT = `
                                  
                                  
@@ -261,12 +263,12 @@ function TextView(props) {
   if (typeof forward_room === 'undefined') {
     t.push(FORWARD.split(""))
   }
-/*
   else {
-    forward_left_room = forward_room.goLeft(direction)
+    let forward_left_room = forward_room.goLeft(direction)
     if (typeof forward_left_room === 'undefined') {
       t.push(FORWARD_LEFT.split(""))
     }
+/*
     else {
       if (typeof forward_left_room.goForward(direction) === 'undefined') {
         t.push(FORWARD_LEFT_FORWARD_RIGHT.split(""))
@@ -284,7 +286,7 @@ function TextView(props) {
         t.push(FORWARD_RIGHT_FORWARD_LEFT.split(""))
       }
     }
-/*
+*/
   }
 /*
   if (typeof right_room === 'undefined') {
