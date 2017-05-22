@@ -40,12 +40,29 @@ class Room {
     }
   }
 
+  getLeftDirection = (direction) => {
+    switch (direction) {
+    case 'N':
+      return('W');
+    case 'E':
+      return('N');
+    case 'S':
+      return('E');
+    default:
+      return('S');
+    }
+  }
+
   goForward = (direction) => {
     return(this.passages[direction]);
   }
 
   goBackward = (direction) => {
     return(this.passages[this.getBackwardDirection(direction)]);
+  }
+
+  goLeft = (direction) => {
+    return(this.passages[this.getLeftDirection(direction)]);
   }
 }
 
