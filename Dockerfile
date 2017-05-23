@@ -1,15 +1,10 @@
-FROM ruby:2.4
+FROM node:7.10
 
-RUN apt-get update && apt-get install -y \
-      --fix-missing --no-install-recommends \
-      build-essential nodejs \
-      && rm -rf /var/lib/apt/lists/*
 WORKDIR /
-RUN git clone https://github.com/TerryHowe/rubymaze.git
-WORKDIR /rubymaze
-RUN bundle install
-RUN bundle exec rake RAILS_ENV=production assets:precompile
-RUN rails db:migrate RAILS_ENV=production
+RUN git clone https://github.com/TerryHowe/reactmaze.git
+WORKDIR /reactmaze
+RUN npm run build
+RUN yarn global add serve
 
-EXPOSE 4000
-ENTRYPOINT ["/rubymaze/run.sh"]
+EXPOSE 3000
+ENTRYPOINT ["/reactmaze/run.sh"]
